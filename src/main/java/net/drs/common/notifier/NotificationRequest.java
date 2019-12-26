@@ -16,27 +16,32 @@ public class NotificationRequest implements Serializable {
     private String phoneNumber;
 
     private String template;
-    
-    private Map<String,String> message;
+
+    private String emailContent;
+
+    private Map<String, String> data;
 
     private NotificationType notificationType = NotificationType.EMAIL; // by
                                                                         // default
 
-    public NotificationRequest(Long notificationId, String emailid, String phoneNumber, Map<String,String> message , NotificationTemplate notificationTemplate, NotificationType notificationType) {
+    private NotificationTemplate notificationTemplate = NotificationTemplate.NEW_REGISTRATION;
+
+    public NotificationRequest(Long notificationId, String emailid, String phoneNumber, Map<String, String> data, NotificationTemplate notificationTemplate, NotificationType notificationType) {
         super();
         this.notificationId = notificationId;
         this.emailid = emailid;
-        this.message = message;
+        this.data = data;
         this.notificationType = notificationType;
         this.phoneNumber = phoneNumber;
+        this.notificationTemplate = notificationTemplate;
     }
 
     public NotificationRequest() {
         super();
     }
-    
-    public Map<String,String> getMessage(){
-        return message;
+
+    public Map<String, String> getData() {
+        return data;
     }
 
     public String getEmailid() {
@@ -69,5 +74,17 @@ public class NotificationRequest implements Serializable {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getEmailContent() {
+        return emailContent;
+    }
+
+    public void setEmailContent(String emailContent) {
+        this.emailContent = emailContent;
+    }
+
+    public NotificationTemplate getNotificationTemplate() {
+        return notificationTemplate;
     }
 }
