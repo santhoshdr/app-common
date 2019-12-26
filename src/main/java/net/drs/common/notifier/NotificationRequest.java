@@ -1,31 +1,42 @@
 package net.drs.common.notifier;
 
 import java.io.Serializable;
+import java.util.Map;
 
-public class NotificationRequest  implements Serializable{
+public class NotificationRequest implements Serializable {
     /**
      * 
      */
     private static final long serialVersionUID = 2358050464685162683L;
-    
+
     private Long notificationId;
 
     private String emailid;
-    
+
+    private String phoneNumber;
+
     private String template;
     
-    private NotificationType notificationType = NotificationType.EMAIL; // by default
-        
-    public NotificationRequest(Long notificationId, String emailid, String template,String notificationType) {
+    private Map<String,String> message;
+
+    private NotificationType notificationType = NotificationType.EMAIL; // by
+                                                                        // default
+
+    public NotificationRequest(Long notificationId, String emailid, String phoneNumber, Map<String,String> message , NotificationTemplate notificationTemplate, NotificationType notificationType) {
         super();
         this.notificationId = notificationId;
         this.emailid = emailid;
-        this.template = template;
-        this.notificationType=NotificationType.valueOf(notificationType);
+        this.message = message;
+        this.notificationType = notificationType;
+        this.phoneNumber = phoneNumber;
     }
 
     public NotificationRequest() {
         super();
+    }
+    
+    public Map<String,String> getMessage(){
+        return message;
     }
 
     public String getEmailid() {
@@ -44,7 +55,6 @@ public class NotificationRequest  implements Serializable{
         this.template = template;
     }
 
-
     public Long getNotificationId() {
         return notificationId;
     }
@@ -52,9 +62,12 @@ public class NotificationRequest  implements Serializable{
     public void setNotificationId(Long notificationId) {
         this.notificationId = notificationId;
     }
-    
-    
+
     public String getNotificationType() {
-        return notificationType.getNotificationDisplayName();
+        return notificationType.getNotificationType();
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
